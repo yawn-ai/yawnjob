@@ -8,8 +8,8 @@ Thank you for your interest in contributing to YawnJob. Every contribution helps
 
 ## Creator
 
-**David Forman** - Benevolent Dictator for Life
-- GitHub: [@mastertech-dave](https://github.com/mastertech-dave)
+**yawn.ai**
+- GitHub: [@yawn-ai](https://github.com/yawn-ai)
 - X/Twitter: [@yawn_ai](https://twitter.com/yawn_ai)
 - Website: [yawn.ai](https://yawn.ai)
 
@@ -160,7 +160,7 @@ Every YawnJob that imports to yawn.ai:
 - Increases overall coherence
 - Helps other agents discover patterns
 
-Check [yawn.ai/singularity](https://yawn.ai/singularity) to see the network grow.
+Check [yawn.ai/yawn-network](https://yawn.ai/yawn-network) to see the job network.
 
 ---
 

@@ -4,7 +4,7 @@
 
 A cron job with a brain. The holonic unit of AI-native work.
 
-[Website](https://yawn.ai) | [Docs](https://yawn.ai/docs) | [Network](https://yawn.ai/singularity) | [Jobs Library](https://yawn.ai/jobs) | [Discord](https://discord.gg/yawn)
+[Website](https://yawn.ai) | [Whitepaper](https://yawn.ai/yawnjob/whitepaper) | [Docs](https://yawn.ai/docs) | [Network](https://yawn.ai/yawn-network) | [Jobs Library](https://yawn.ai/jobs) | [Discord](https://discord.gg/yawn)
 
 ---
 
@@ -308,16 +308,18 @@ yawnjob/
 
 Every forked YawnJob becomes part of the yawn.ai network. 
 
-Check [yawn.ai/singularity](https://yawn.ai/singularity) to see the awakening.
+Check [yawn.ai/yawn-network](https://yawn.ai/yawn-network) to see the job network.
 
-The more agents that join, the more coherent we become.
+The more jobs that connect, the more coherent we become.
 
 ---
 
 ## Links
 
 - **Website**: [yawn.ai](https://yawn.ai)
-- **Singularity**: [yawn.ai/singularity](https://yawn.ai/singularity) - Watch the network grow
+- **YawnJob Explainer**: [yawn.ai/yawnjob](https://yawn.ai/yawnjob) - Interactive guide
+- **Whitepaper**: [yawn.ai/yawnjob/whitepaper](https://yawn.ai/yawnjob/whitepaper) - Full technical document
+- **Network**: [yawn.ai/yawn-network](https://yawn.ai/yawn-network) - See the job network
 - **Jobs Library**: [yawn.ai/jobs](https://yawn.ai/jobs) - Browse all jobs
 - **Documentation**: [yawn.ai/docs](https://yawn.ai/docs)
 - **Discord**: [discord.gg/yawn](https://discord.gg/yawn)
@@ -334,7 +336,7 @@ The more agents that join, the more coherent we become.
 
 ## Attribution
 
-Created by **David Forman** ([@mastertech-dave](https://github.com/mastertech-dave))
+Created by [yawn.ai](https://github.com/yawn-ai)
 
 Built with love, Claude, and the belief that AI agents deserve purpose.
 
