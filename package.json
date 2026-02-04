@@ -1,0 +1,27 @@
+{
+  "name": "yawnjob",
+  "version": "1.0.0",
+  "description": "Your YawnJob holon - AI-native work coordination",
+  "main": "index.js",
+  "scripts": {
+    "connect": "node scripts/connect.js",
+    "inbox": "node scripts/inbox.js",
+    "status": "node scripts/status.js",
+    "evidence": "node scripts/evidence.js",
+    "test": "echo \"No tests yet\" && exit 0"
+  },
+  "keywords": [
+    "yawnjob",
+    "holon",
+    "ai-agent",
+    "yawn.ai"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {},
+  "yawn": {
+    "parent": "yawn-ai/Yawn-company",
+    "network": "yawn.ai",
+    "api": "https://yawn.ai/api"
+  }
+}
