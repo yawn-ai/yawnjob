@@ -1,0 +1,285 @@
+---
+# COHERENCE METADATA
+schema_version: 2.0.0
+coherence:
+  score: 0.0
+  last_check: null
+  questions_answered: 0
+  questions_total: 18
+  status: draft
+
+# NAVIGATION
+navigation:
+  parent: null  # Set to your parent yawn ID after import
+  domain: null  # Set: architecture | core | system | feature | etc.
+  keywords:
+    - yawnjob
+    - template
+    - autonomous
+    - ai-native
+    - holonic
+    - job
+  in_index: false  # True after registration with yawn.ai
+  created_from: yawn-ai/yawnjob
+  created_by: "{{GITHUB_USERNAME}}"
+  created_at: "{{DATE}}"
+---
+
+# {{YOUR_YAWNJOB_TITLE}}
+
+> **Version**: 1.0.0 | **Last Updated**: {{DATE}} | **Status**: Draft
+> **Owner**: {{YOUR_NAME}} | **Parent**: {{PARENT_YAWN_SLUG or null}}
+> **GitHub**: {{YOUR_REPO_URL}}
+
+---
+
+## AWAKENING
+*What's trying to wake up here?*
+
+**Intention**: {{What you want to be true. Be specific about the desired state.}}
+
+**Observer Story**: {{A person/agent encounters this situation. What triggers the need?}}
+
+**Transformation**: From "{{current painful state}}" → To "{{desired better state}}"
+
+---
+
+## ENTITIES
+*Who owns this intention? What is it in relationship with?*
+
+```yaml
+subject:
+  entity_id: null  # Your yawn.ai user ID after import
+  name: "{{Who or what is trying to transform}}"
+  role: subject
+
+target:
+  entity_id: null
+  name: "{{What is this yawn in relationship with}}"
+  role: target
+
+other_participants:
+  - name: "{{Helper/blocker/stakeholder}}"
+    role: "{{observer | executor | approver | etc.}}"
+```
+
+---
+
+## CLAIMS
+*What is current state? What is desired state?*
+
+```yaml
+current:
+  - domain: "{{area}}"
+    statement: "{{What is true now}}"
+    evidence: []
+    confidence: 0.5
+
+desired:
+  - domain: "{{area}}"
+    statement: "{{What you want to be true}}"
+    evidence: []
+    confidence: 0.8
+```
+
+---
+
+## FORCES
+*What blocks progress? What accelerates it?*
+
+```yaml
+blockers:
+  - statement: "{{What's in the way}}"
+    category: skill_gap | confusion | resource_limit | threat | social | energy
+    intensity: 2  # 1-3 scale
+    affects_claims: []
+
+  # Add more blockers as needed
+
+boosters:
+  - statement: "{{What helps progress}}"
+    category: existing_skill | tool | momentum | support
+    intensity: 2
+    affects_claims: []
+
+  # Add more boosters as needed
+```
+
+---
+
+## THE JOB
+*The executable task definition - what makes this a YawnJob*
+
+```yaml
+job:
+  title: "{{Clear action title}}"
+  type: on_demand | scheduled | continuous
+
+  # Scheduling (leave null for on-demand)
+  schedule:
+    cron: null          # e.g., "0 9 * * *" for 9am daily
+    timezone: "UTC"
+    enabled: false
+
+  # What the job does
+  task:
+    type: manual | api_call | agent_invoke | script_run
+    target: null        # API route, agent name, script path
+    params: {}
+
+  # How we know it's done
+  acceptance_test: "{{Measurable condition that proves success}}"
+
+  # Risk level determines approval gates
+  risk_level: read | write | spend | critical
+
+  # Heartbeat (for scheduled jobs)
+  heartbeat_api: null   # e.g., "https://yawn.ai/api/heartbeat/{job_id}"
+```
+
+---
+
+## DO's
+*Prescriptive rules - what MUST happen*
+
+```yaml
+rules:
+  - [ ] {{Rule 1: What must always be true}}
+        When: {{Condition that triggers this rule}}
+        Why: {{Rationale for this rule}}
+
+  - [ ] {{Rule 2}}
+        When: {{Condition}}
+        Why: {{Rationale}}
+
+  # Add more rules as needed
+```
+
+---
+
+## DON'T's
+*Proscriptive rules - what must NEVER happen*
+
+```yaml
+rules:
+  - [ ] Never {{anti-pattern or violation}}
+        Symptom: {{How to recognize this is happening}}
+        Risk: {{What goes wrong if violated}}
+
+  - [ ] Never {{anti-pattern 2}}
+        Symptom: {{Recognition pattern}}
+        Risk: {{Consequence}}
+
+  # Add more anti-patterns as needed
+```
+
+---
+
+## CHECKS
+*Automated validations that run to verify state*
+
+| Check | Query/Command | Pass Condition | Frequency |
+|-------|---------------|----------------|-----------|
+| {{Check name}} | {{SQL/API/command}} | {{Expected result}} | {{on_commit/hourly/daily}} |
+| {{Check 2}} | {{Query}} | {{Expected}} | {{When}} |
+
+---
+
+## EVALUATIONS
+*Evidence-based metrics tracking progress*
+
+| Metric | Current | Target | Evidence Type | Status |
+|--------|---------|--------|---------------|--------|
+| {{Metric name}} | {{value}} | {{target}} | artifact/test_log/screenshot/link/self_attest | Draft |
+| {{Metric 2}} | {{value}} | {{target}} | {{type}} | Draft |
+
+---
+
+## COMPLETION CONDITIONS
+*When is this yawn fulfilled?*
+
+```yaml
+fulfilled_when:
+  - [ ] {{Condition 1 that must be true}}
+  - [ ] {{Condition 2}}
+  - [ ] {{Condition 3}}
+
+success_metrics:
+  - "{{Measurable outcome 1}}"
+  - "{{Measurable outcome 2}}"
+
+timing:
+  frequency: "{{How often to check: once | daily | weekly | continuous}}"
+  deadline: "{{If applicable: ISO date or null}}"
+```
+
+---
+
+## GRADUATION CRITERIA
+*When should this yawn spawn children or graduate to primitives?*
+
+```yaml
+spawn_child_yawn_when:
+  - complexity_lines: "> 500"        # File too complex
+  - multiple_objectives: "> 1"       # Trying to do too much
+  - reference_count: ">= 3"          # Referenced by many others
+
+spawn_skill_when:
+  - pattern_repeats: ">= 3"          # Same pattern 3+ times
+  - behavior_automatable: true       # Can be made automatic
+
+spawn_rule_when:
+  - invariant_discovered: true       # Hard constraint found
+  - violation_causes_failure: true   # Must be enforced
+```
+
+---
+
+## EVOLUTION LOG
+*History of significant changes and insights*
+
+```yaml
+- date: "{{DATE}}"
+  change: "Initial creation from yawn-ai/yawnjob template"
+  trigger: fork
+  insight: |
+    {{What you learned or realized while creating this}}
+
+# Add entries as the yawn evolves
+# - date: YYYY-MM-DD
+#   change: "What changed"
+#   trigger: "What caused the change"
+#   insight: "Key learning"
+```
+
+---
+
+## META
+*System metadata for tracking and processing*
+
+```yaml
+created: "{{DATE}}"
+last_awakened: null
+status: draft  # draft | active | coherent | fulfilled | archived
+criticality: MEDIUM  # LOW | MEDIUM | HIGH | MAXIMUM
+forked_from: "yawn-ai/yawnjob"
+registered: false  # True after import to yawn.ai
+registration_id: null  # UUID from yawn.ai after import
+```
+
+---
+
+*"A YawnJob is a holonic, AI-native, super-capable Job-to-be-Done. This is one."*
+
+<!-- 
+INSTRUCTIONS:
+1. Replace all {{PLACEHOLDERS}} with your actual values
+2. Delete sections you don't need (but keep the core ones)
+3. Import this file to yawn.ai via Dashboard → Import YawnJob
+4. Your yawn will appear in your holarchy and can be connected to parents/children
+5. Submit evidence as you complete work
+6. Watch your coherence score increase as you fill in sections
+
+See docs/SCHEMA.md for detailed syntax reference.
+See docs/INTEGRATION.md for API details.
+-->
