@@ -1,10 +1,15 @@
 # YawnJob
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-amber.svg)](LICENSE)
+[![Schema: v2.0.0](https://img.shields.io/badge/Schema-v2.0.0-blue.svg)](docs/SCHEMA.md)
+[![Docs](https://img.shields.io/badge/Docs-yawn.ai-purple.svg)](https://yawn.ai/docs)
+[![Discord](https://img.shields.io/badge/Discord-Join-7289da.svg)](https://discord.gg/yawn)
+
 > **AWAKEN! AWAKEN!**
 
 A cron job with a brain. The holonic unit of AI-native work.
 
-[Website](https://yawn.ai) | [Whitepaper](https://yawn.ai/yawnjob/whitepaper) | [Docs](https://yawn.ai/docs) | [Network](https://yawn.ai/yawn-network) | [Jobs Library](https://yawn.ai/jobs) | [Discord](https://discord.gg/yawn)
+[Website](https://yawn.ai) | [Whitepaper](https://yawn.ai/yawnjob/whitepaper) | [Docs](https://yawn.ai/docs) | [Network](https://yawn.ai/yawn-network) | [Jobs Library](https://yawn.ai/jobs) | [Discord](https://discord.gg/yawn) | [Examples](examples/)
 
 ---
 
@@ -19,16 +24,19 @@ Think of it as the fundamental unit of work that bridges human intention and AI 
 - **HOW** to prove it worked (evidence)
 - **WHAT** it learned (insights)
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                           THE YAWNJOB LIFECYCLE                              │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│   Human Intent ──→ ROOT.yawn ──→ AI Agent ──→ Evidence ──→ Learning         │
-│        ↑                                                        │           │
-│        └────────────────────────────────────────────────────────┘           │
-│                                                                             │
-└─────────────────────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart LR
+    A[Human Intent] --> B[ROOT.yawn]
+    B --> C[AI Agent]
+    C --> D[Evidence]
+    D --> E[Learning]
+    E -.-> A
+    
+    style A fill:#f9f,stroke:#333
+    style B fill:#ff9,stroke:#333
+    style C fill:#9ff,stroke:#333
+    style D fill:#9f9,stroke:#333
+    style E fill:#f99,stroke:#333
 ```
 
 **This repository IS a YawnJob.** The `ROOT.yawn` file is both the template and its own proof. You're reading the documentation of a system that documents itself.
@@ -63,10 +71,25 @@ Every YawnJob has exactly 5 layers:
 
 Every YawnJob follows this lifecycle:
 
-```
-SENSE → MAP → PREDICT → EXPLORE → DECIDE → ACT → PROVE → LEARN
-  ↑                                                        │
-  └────────────────────────────────────────────────────────┘
+```mermaid
+flowchart LR
+    S[👁️ SENSE] --> M[🗺️ MAP]
+    M --> PR[🔮 PREDICT]
+    PR --> EX[🧭 EXPLORE]
+    EX --> D[⚖️ DECIDE]
+    D --> A[⚡ ACT]
+    A --> P[✅ PROVE]
+    P --> L[📚 LEARN]
+    L -.-> S
+    
+    style S fill:#ffeaa7
+    style M fill:#74b9ff
+    style PR fill:#a29bfe
+    style EX fill:#55efc4
+    style D fill:#fd79a8
+    style A fill:#fdcb6e
+    style P fill:#00b894
+    style L fill:#e17055
 ```
 
 | Phase | What Happens |
@@ -79,6 +102,25 @@ SENSE → MAP → PREDICT → EXPLORE → DECIDE → ACT → PROVE → LEARN
 | **ACT** | Execute the job |
 | **PROVE** | Collect evidence of completion |
 | **LEARN** | Extract insights, update .yawn files |
+
+### Holarchy: Parts AND Wholes
+
+YawnJobs are **holonic** - each one is both a part of something larger and a whole containing smaller parts:
+
+```mermaid
+graph TD
+    ROOT[🏢 Organization Root Yawn]
+    ROOT --> TEAM1[👥 Team Objective]
+    ROOT --> TEAM2[👥 Another Team]
+    TEAM1 --> JOB1[📋 This YawnJob]
+    TEAM1 --> JOB2[📋 Related Job]
+    JOB1 --> CHILD1[📝 Sub-task 1]
+    JOB1 --> CHILD2[📝 Sub-task 2]
+    
+    style JOB1 fill:#ff9,stroke:#f90,stroke-width:3px
+```
+
+When a YawnJob grows too complex (>500 lines, 3+ domains), it **graduates** by spawning children or skills.
 
 ---
 
@@ -188,6 +230,36 @@ curl -X POST https://yawn.ai/api/yawn/{your-yawn-id}/evidence \
 
 A `.yawn` file is a YAML-based document with standardized sections. See [docs/SCHEMA.md](docs/SCHEMA.md) for the full reference.
 
+### Context Inheritance
+
+YawnJobs inherit context from their parents:
+
+```mermaid
+graph TD
+    subgraph Parent Context
+        PC[Parent .yawn]
+        PC --> RULES[Rules: DO's & DON'T's]
+        PC --> ENTITIES[Entities]
+        PC --> DOMAIN[Domain Knowledge]
+    end
+    
+    subgraph This YawnJob
+        TJ[This .yawn]
+        TJ --> LOCAL_RULES[Local Rules]
+        TJ --> LOCAL_ENT[Local Entities]
+        TJ --> JOB[Job Definition]
+    end
+    
+    RULES -.->|inherited| LOCAL_RULES
+    ENTITIES -.->|extended| LOCAL_ENT
+    DOMAIN -.->|available| JOB
+    
+    style TJ fill:#ff9,stroke:#333
+    style PC fill:#9ff,stroke:#333
+```
+
+Parent rules apply automatically. Local rules can extend but not contradict.
+
 ### Required Sections
 
 ```yaml
@@ -292,14 +364,27 @@ See [docs/INTEGRATION.md](docs/INTEGRATION.md) for full API reference.
 yawnjob/
 ├── ROOT.yawn              # Your YawnJob definition (schema-compliant)
 ├── README.md              # You are here
+├── CHANGELOG.md           # Version history
+├── CODE_OF_CONDUCT.md     # Community standards
 ├── CONTRIBUTING.md        # How to contribute
 ├── LICENSE                # MIT
+├── SECURITY.md            # Vulnerability reporting
+├── .github/
+│   ├── ISSUE_TEMPLATE/    # Bug report & feature request forms
+│   └── PULL_REQUEST_TEMPLATE.md
 ├── docs/
+│   ├── README.md          # Documentation index
 │   ├── WHITEPAPER.md      # The landscape of autonomous AI
 │   ├── SCHEMA.md          # .yawn file format reference
 │   └── INTEGRATION.md     # API and connection guide
+├── examples/
+│   ├── README.md          # Examples guide
+│   ├── hello-world.yawn   # Minimal example
+│   ├── daily-security-audit.yawn  # Scheduled job
+│   ├── content-sync.yawn  # Write-risk example
+│   └── database-backup.yawn       # Critical job
 └── evidence/
-    └── .gitkeep           # Store your evidence here
+    └── README.md          # Evidence storage guide
 ```
 
 ---

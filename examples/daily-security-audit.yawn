@@ -1,0 +1,291 @@
+---
+# COHERENCE METADATA
+schema_version: 2.0.0
+coherence:
+  score: 90.0
+  last_check: "2026-02-04"
+  questions_answered: 16
+  questions_total: 18
+  status: active
+
+# NAVIGATION
+navigation:
+  parent: null
+  domain: security
+  keywords:
+    - security
+    - audit
+    - scheduled
+    - cron
+    - daily
+  in_index: false
+  created_from: yawn-ai/yawnjob
+  created_by: "yawn-ai"
+  created_at: "2026-02-04"
+---
+
+# Daily Security Audit
+
+> **Version**: 1.0.0 | **Last Updated**: 2026-02-04 | **Status**: Active
+> **Owner**: Security Team | **Parent**: null
+> **GitHub**: https://github.com/your-org/security-audit
+
+---
+
+## AWAKENING
+*Automated security checks that run every morning.*
+
+**Intention**: All production endpoints pass security checks every morning before business hours.
+
+**Observer Story**: A security engineer wants to catch vulnerabilities early. Every morning at 6am, an automated audit runs against all production endpoints, checking for common security issues. Results are logged as evidence, and any failures trigger alerts.
+
+**Transformation**: From "unknown security state" → To "verified secure every morning"
+
+---
+
+## ENTITIES
+*Who owns this intention?*
+
+```yaml
+subject:
+  entity_id: null
+  name: "Security Team"
+  role: subject
+
+target:
+  entity_id: null
+  name: "Production API Endpoints"
+  role: target
+
+other_participants:
+  - name: "DevOps Team"
+    role: executor
+  - name: "Engineering Lead"
+    role: approver
+```
+
+---
+
+## CLAIMS
+*What is current vs desired state?*
+
+```yaml
+current:
+  - domain: security
+    statement: "Security audits run manually and inconsistently"
+    evidence: []
+    confidence: 0.9
+
+desired:
+  - domain: security
+    statement: "Automated daily audits with evidence trail"
+    evidence: []
+    confidence: 0.95
+```
+
+---
+
+## FORCES
+*What affects progress?*
+
+```yaml
+blockers:
+  - statement: "New endpoints may not be included in audit scope"
+    category: skill_gap
+    intensity: 2
+    affects_claims: ["desired"]
+
+  - statement: "False positives can cause alert fatigue"
+    category: confusion
+    intensity: 1
+    affects_claims: []
+
+boosters:
+  - statement: "Existing security scanner tool is reliable"
+    category: tool
+    intensity: 3
+    affects_claims: ["desired"]
+
+  - statement: "Team has security expertise"
+    category: existing_skill
+    intensity: 2
+    affects_claims: []
+```
+
+---
+
+## THE JOB
+*The scheduled security audit task*
+
+```yaml
+job:
+  title: "Run Daily Security Audit"
+  type: scheduled
+
+  schedule:
+    cron: "0 6 * * *"      # 6am UTC daily
+    timezone: "UTC"
+    enabled: true
+
+  task:
+    type: script_run
+    target: "scripts/security-audit.sh"
+    params:
+      scope: "production"
+      severity_threshold: "medium"
+      output_format: "json"
+
+  acceptance_test: "All endpoints pass with no HIGH or CRITICAL findings"
+
+  risk_level: read
+
+  heartbeat_api: "https://yawn.ai/api/heartbeat/security-audit"
+```
+
+---
+
+## DO's
+*What MUST happen?*
+
+```yaml
+rules:
+  - [ ] Scan ALL production endpoints
+        When: Every scheduled run
+        Why: Incomplete coverage creates blind spots
+
+  - [ ] Log all findings as evidence
+        When: After each scan completes
+        Why: Creates audit trail for compliance
+
+  - [ ] Alert on HIGH or CRITICAL findings
+        When: Immediately upon detection
+        Why: Time-sensitive security issues need fast response
+
+  - [ ] Rotate API keys used for scanning
+        When: Monthly
+        Why: Limit exposure if keys are compromised
+```
+
+---
+
+## DON'T's
+*What must NEVER happen?*
+
+```yaml
+rules:
+  - [ ] Never skip runs without documented reason
+        Symptom: Gaps in audit history
+        Risk: Vulnerabilities go undetected
+
+  - [ ] Never ignore false positives without investigation
+        Symptom: Same "false positive" appears repeatedly
+        Risk: Real issue masked as false positive
+
+  - [ ] Never store credentials in the .yawn file
+        Symptom: API keys visible in version control
+        Risk: Credential exposure
+```
+
+---
+
+## CHECKS
+*Automated validations*
+
+| Check | Query/Command | Pass Condition | Frequency |
+|-------|---------------|----------------|-----------|
+| Audit completed | `curl $HEARTBEAT_API/status` | `last_run < 24h ago` | hourly |
+| No critical findings | `jq '.findings[] | select(.severity=="CRITICAL")' results.json` | Empty result | daily |
+| Coverage complete | `diff endpoints.txt scanned.txt` | No diff | daily |
+
+---
+
+## EVALUATIONS
+*Evidence-based metrics*
+
+| Metric | Current | Target | Evidence Type | Status |
+|--------|---------|--------|---------------|--------|
+| Endpoints scanned | 47/50 | 50/50 | test_log | Active |
+| Days without HIGH findings | 12 | 30+ | artifact | Active |
+| Avg scan duration | 8 min | < 15 min | test_log | Complete |
+| False positive rate | 5% | < 10% | artifact | Complete |
+
+---
+
+## COMPLETION CONDITIONS
+*When is this fulfilled?*
+
+```yaml
+fulfilled_when:
+  - [ ] 30 consecutive days with no HIGH/CRITICAL findings
+  - [ ] 100% endpoint coverage achieved
+  - [ ] False positive rate below 5%
+
+success_metrics:
+  - "Zero security incidents from scanned endpoints"
+  - "Full audit trail for compliance"
+
+timing:
+  frequency: continuous
+  deadline: null
+```
+
+---
+
+## GRADUATION CRITERIA
+*When should this spawn children or graduate?*
+
+```yaml
+spawn_child_yawn_when:
+  - condition: "New endpoint category added (e.g., GraphQL)"
+    action: "Create child yawn for GraphQL-specific audits"
+
+  - condition: "Compliance requirement added (e.g., SOC2)"
+    action: "Create child yawn for SOC2 audit mapping"
+
+spawn_skill_when:
+  - pattern_repeats: ">= 3"
+    description: "If similar audit patterns emerge, extract to reusable skill"
+
+spawn_rule_when:
+  - invariant_discovered: true
+    description: "If hard constraint found, add to security rules"
+```
+
+---
+
+## EVOLUTION LOG
+*How has this changed?*
+
+```yaml
+- date: "2026-02-04"
+  change: "Initial creation as scheduled audit example"
+  trigger: "OSS repository improvement"
+  insight: |
+    Scheduled jobs need clear acceptance tests.
+    Evidence logging is crucial for security compliance.
+
+# Future entries:
+# - date: YYYY-MM-DD
+#   change: "Added GraphQL endpoint scanning"
+#   trigger: "New API surface area"
+#   insight: "Child yawn may be needed for protocol-specific audits"
+```
+
+---
+
+## META
+*System metadata*
+
+```yaml
+created: "2026-02-04"
+last_awakened: "2026-02-04T06:00:00Z"
+status: active
+criticality: HIGH
+forked_from: "yawn-ai/yawnjob"
+registered: false
+registration_id: null
+```
+
+---
+
+*"Security is not an event, it's a continuous process. This YawnJob makes it automatic."*

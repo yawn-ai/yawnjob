@@ -1,0 +1,315 @@
+---
+# COHERENCE METADATA
+schema_version: 2.0.0
+coherence:
+  score: 88.0
+  last_check: "2026-02-04"
+  questions_answered: 16
+  questions_total: 18
+  status: active
+
+# NAVIGATION
+navigation:
+  parent: null
+  domain: content
+  keywords:
+    - sync
+    - content
+    - write
+    - approval
+    - cms
+  in_index: false
+  created_from: yawn-ai/yawnjob
+  created_by: "yawn-ai"
+  created_at: "2026-02-04"
+---
+
+# Content Sync Job
+
+> **Version**: 1.0.0 | **Last Updated**: 2026-02-04 | **Status**: Active
+> **Owner**: Content Team | **Parent**: null
+> **GitHub**: https://github.com/your-org/content-sync
+
+---
+
+## AWAKENING
+*Sync content from CMS to production with approval gates.*
+
+**Intention**: Published content in the CMS is synchronized to the production website within 1 hour, with human approval for significant changes.
+
+**Observer Story**: A content editor publishes a new blog post in the CMS. The system detects the change, generates a preview, and requests approval from the content lead. Once approved, the content syncs to production. Evidence of the sync is logged for audit.
+
+**Transformation**: From "manual content deployment" → To "automated sync with approval workflow"
+
+---
+
+## ENTITIES
+*Who owns this intention?*
+
+```yaml
+subject:
+  entity_id: null
+  name: "Content Team"
+  role: subject
+
+target:
+  entity_id: null
+  name: "Production Website"
+  role: target
+
+other_participants:
+  - name: "CMS (Contentful/Sanity/etc.)"
+    role: source
+  - name: "Content Lead"
+    role: approver
+  - name: "CI/CD Pipeline"
+    role: executor
+```
+
+---
+
+## CLAIMS
+*What is current vs desired state?*
+
+```yaml
+current:
+  - domain: content
+    statement: "Content sync requires manual deployment"
+    evidence: []
+    confidence: 0.85
+
+  - domain: quality
+    statement: "Some content goes live without review"
+    evidence: []
+    confidence: 0.7
+
+desired:
+  - domain: content
+    statement: "Content syncs automatically with approval workflow"
+    evidence: []
+    confidence: 0.9
+
+  - domain: quality
+    statement: "All significant changes reviewed before production"
+    evidence: []
+    confidence: 0.95
+```
+
+---
+
+## FORCES
+*What affects progress?*
+
+```yaml
+blockers:
+  - statement: "Approval bottleneck can delay urgent content"
+    category: resource_limit
+    intensity: 2
+    affects_claims: ["desired"]
+
+  - statement: "CMS webhook reliability varies"
+    category: threat
+    intensity: 1
+    affects_claims: []
+
+  - statement: "Large content changes take time to review"
+    category: skill_gap
+    intensity: 1
+    affects_claims: []
+
+boosters:
+  - statement: "Preview environment available for review"
+    category: tool
+    intensity: 3
+    affects_claims: ["desired"]
+
+  - statement: "Content team trained on approval workflow"
+    category: existing_skill
+    intensity: 2
+    affects_claims: []
+
+  - statement: "Rollback capability reduces risk"
+    category: support
+    intensity: 2
+    affects_claims: []
+```
+
+---
+
+## THE JOB
+*The content sync task with approval*
+
+```yaml
+job:
+  title: "Sync CMS Content to Production"
+  type: on_demand
+
+  schedule:
+    cron: null           # Triggered by webhook, not scheduled
+    timezone: "UTC"
+    enabled: false
+
+  task:
+    type: api_call
+    target: "/api/content/sync"
+    params:
+      source: "cms"
+      destination: "production"
+      preview_first: true
+      notify_approver: true
+
+  acceptance_test: "Content appears on production within 1 hour of approval"
+
+  # WRITE risk level = requires approval before execution
+  risk_level: write
+
+  heartbeat_api: null
+```
+
+---
+
+## DO's
+*What MUST happen?*
+
+```yaml
+rules:
+  - [ ] Generate preview before syncing to production
+        When: Every sync request
+        Why: Catch formatting/rendering issues before they go live
+
+  - [ ] Request approval for changes > 100 words
+        When: Content diff exceeds threshold
+        Why: Significant changes need human review
+
+  - [ ] Log all sync operations with before/after state
+        When: After every sync completes
+        Why: Audit trail and rollback capability
+
+  - [ ] Send notification to author when sync completes
+        When: After successful production deployment
+        Why: Confirms their content is live
+```
+
+---
+
+## DON'T's
+*What must NEVER happen?*
+
+```yaml
+rules:
+  - [ ] Never sync without preview generation
+        Symptom: Content goes directly to production
+        Risk: Broken formatting visible to users
+
+  - [ ] Never bypass approval for write operations
+        Symptom: risk_level changed to 'read'
+        Risk: Unreviewed content on production
+
+  - [ ] Never delete content without explicit confirmation
+        Symptom: "Unpublish" in CMS triggers immediate removal
+        Risk: Accidental content loss
+
+  - [ ] Never sync during maintenance windows
+        Symptom: Sync attempts while site is down
+        Risk: Failed syncs, inconsistent state
+```
+
+---
+
+## CHECKS
+*Automated validations*
+
+| Check | Query/Command | Pass Condition | Frequency |
+|-------|---------------|----------------|-----------|
+| Preview available | `curl -s $PREVIEW_URL -o /dev/null -w "%{http_code}"` | `200` | per_sync |
+| Sync completed | `SELECT * FROM sync_log WHERE status='complete' AND created_at > NOW() - INTERVAL '1 hour'` | Rows exist | hourly |
+| No pending approvals > 24h | `SELECT COUNT(*) FROM approvals WHERE status='pending' AND created_at < NOW() - INTERVAL '24 hours'` | `0` | daily |
+
+---
+
+## EVALUATIONS
+*Evidence-based metrics*
+
+| Metric | Current | Target | Evidence Type | Status |
+|--------|---------|--------|---------------|--------|
+| Avg sync time (after approval) | 12 min | < 30 min | test_log | Complete |
+| Approval rate | 95% | > 90% | artifact | Complete |
+| Rollback frequency | 2/month | < 5/month | link | Active |
+| Preview accuracy | 98% | > 95% | screenshot | Complete |
+
+---
+
+## COMPLETION CONDITIONS
+*When is this fulfilled?*
+
+```yaml
+fulfilled_when:
+  - [ ] 95% of content syncs complete within SLA
+  - [ ] Zero unapproved write operations
+  - [ ] Rollback capability tested and documented
+
+success_metrics:
+  - "Content live within 1 hour of approval"
+  - "100% approval compliance for write operations"
+  - "< 5 rollbacks per month"
+
+timing:
+  frequency: continuous
+  deadline: null
+```
+
+---
+
+## GRADUATION CRITERIA
+*When should this spawn children?*
+
+```yaml
+spawn_child_yawn_when:
+  - condition: "New content type added (e.g., video)"
+    action: "Create child yawn for video-specific sync workflow"
+
+  - condition: "Multi-region deployment needed"
+    action: "Create child yawns per region with region-specific approval"
+
+spawn_skill_when:
+  - pattern_repeats: ">= 3"
+    description: "Extract common CMS sync patterns to reusable skill"
+
+spawn_rule_when:
+  - invariant_discovered: true
+    description: "If content constraint found, add to content rules"
+```
+
+---
+
+## EVOLUTION LOG
+*How has this changed?*
+
+```yaml
+- date: "2026-02-04"
+  change: "Initial creation as write-risk example"
+  trigger: "OSS repository improvement"
+  insight: |
+    Write operations need explicit approval gates.
+    Preview environments are essential for content quality.
+    Rollback capability reduces deployment anxiety.
+```
+
+---
+
+## META
+*System metadata*
+
+```yaml
+created: "2026-02-04"
+last_awakened: null
+status: active
+criticality: MEDIUM
+forked_from: "yawn-ai/yawnjob"
+registered: false
+registration_id: null
+```
+
+---
+
+*"Content flows from intent to production. This YawnJob ensures quality gates."*

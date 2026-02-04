@@ -1,0 +1,89 @@
+name: Feature Request
+description: Suggest an improvement to YawnJob
+title: "[Feature]: "
+labels: ["enhancement", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting an improvement! Ideas for making YawnJob better are always welcome.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement
+      description: What problem does this feature solve? What's the intention?
+      placeholder: |
+        I want to [achieve X] but currently [Y is difficult/impossible] because [Z].
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: How would you like this to work?
+      placeholder: |
+        Add a new section called...
+        OR
+        Modify the existing [section] to support...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area affected
+      description: Which part of YawnJob would this change?
+      options:
+        - .yawn schema (new section/field)
+        - ROOT.yawn template
+        - Documentation
+        - Examples
+        - Integration (API)
+        - Tooling (CLI, validation)
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: breaking
+    attributes:
+      label: Breaking change?
+      description: Would this break existing .yawn files?
+      options:
+        - "No - backwards compatible"
+        - "Yes - would require migration"
+        - "Unknown"
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: What other approaches did you consider?
+      placeholder: |
+        I also considered [alternative approach] but [reason it's not ideal].
+
+  - type: textarea
+    id: example
+    attributes:
+      label: Example usage
+      description: Show what this would look like in a .yawn file
+      render: yaml
+      placeholder: |
+        ## NEW_SECTION
+        new_field:
+          value: "example"
+          options:
+            - option1
+            - option2
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution
+      description: Would you be willing to help implement this?
+      options:
+        - label: I'm willing to submit a PR for this feature

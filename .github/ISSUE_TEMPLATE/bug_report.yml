@@ -1,0 +1,86 @@
+name: Bug Report
+description: Report a bug in the YawnJob format or tooling
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! Please fill out the sections below to help us understand and fix the issue.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: What happened? What did you expect to happen?
+      placeholder: |
+        Expected: [what you expected]
+        Actual: [what actually happened]
+    validations:
+      required: true
+
+  - type: textarea
+    id: yawn-file
+    attributes:
+      label: Relevant .yawn snippet
+      description: Paste the relevant portion of your .yawn file (if applicable)
+      render: yaml
+      placeholder: |
+        ## THE JOB
+        job:
+          title: "My Job"
+          type: scheduled
+          ...
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area affected
+      description: Which part of YawnJob is affected?
+      options:
+        - ROOT.yawn template
+        - Schema/format
+        - Documentation
+        - Integration (API)
+        - Examples
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: How can we reproduce this bug?
+      placeholder: |
+        1. Create a .yawn file with...
+        2. Import to yawn.ai...
+        3. See error...
+
+  - type: dropdown
+    id: schema-version
+    attributes:
+      label: Schema version
+      description: Which schema version are you using?
+      options:
+        - "2.0.0"
+        - "1.0.0"
+        - "Unknown"
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Any relevant environment details
+      placeholder: |
+        - OS: macOS 14.0
+        - Tool: Cursor / Claude Code / etc.
+        - yawn.ai account: Yes/No
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional context
+      description: Any other context, screenshots, or error messages

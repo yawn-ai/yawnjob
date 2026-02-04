@@ -1,0 +1,341 @@
+---
+# COHERENCE METADATA
+schema_version: 2.0.0
+coherence:
+  score: 95.0
+  last_check: "2026-02-04"
+  questions_answered: 17
+  questions_total: 18
+  status: coherent
+
+# NAVIGATION
+navigation:
+  parent: null
+  domain: infrastructure
+  keywords:
+    - database
+    - backup
+    - critical
+    - disaster-recovery
+    - scheduled
+  in_index: false
+  created_from: yawn-ai/yawnjob
+  created_by: "yawn-ai"
+  created_at: "2026-02-04"
+---
+
+# Database Backup Job
+
+> **Version**: 1.0.0 | **Last Updated**: 2026-02-04 | **Status**: Coherent
+> **Owner**: Infrastructure Team | **Parent**: null
+> **GitHub**: https://github.com/your-org/database-backup
+
+---
+
+## AWAKENING
+*Critical database backups with full evidence chain.*
+
+**Intention**: Production database is backed up every 6 hours with verified, encrypted, offsite copies. Recovery can be performed within 4 hours of any point in time.
+
+**Observer Story**: At 2am, the backup job awakens. It creates a point-in-time snapshot, encrypts it with the backup key, uploads to three geographic regions, verifies checksums, and logs evidence. If any step fails, it alerts the on-call engineer and retries. The infrastructure lead receives a daily summary.
+
+**Transformation**: From "hope the backups work" → To "proven, verified, recoverable data at all times"
+
+---
+
+## ENTITIES
+*Who owns this intention?*
+
+```yaml
+subject:
+  entity_id: null
+  name: "Infrastructure Team"
+  role: subject
+
+target:
+  entity_id: null
+  name: "Production Database"
+  role: target
+
+other_participants:
+  - name: "Cloud Storage (S3/GCS/Azure)"
+    role: destination
+  - name: "On-Call Engineer"
+    role: observer
+  - name: "Infrastructure Lead"
+    role: approver
+```
+
+---
+
+## CLAIMS
+*What is current vs desired state?*
+
+```yaml
+current:
+  - domain: data_safety
+    statement: "Backups exist but verification is inconsistent"
+    evidence: []
+    confidence: 0.6
+
+  - domain: recovery
+    statement: "Recovery time is unknown (never tested)"
+    evidence: []
+    confidence: 0.3
+
+desired:
+  - domain: data_safety
+    statement: "Every backup verified with checksum and test restore"
+    evidence: []
+    confidence: 0.99
+
+  - domain: recovery
+    statement: "Recovery to any point in last 30 days within 4 hours"
+    evidence: []
+    confidence: 0.95
+```
+
+---
+
+## FORCES
+*What affects progress?*
+
+```yaml
+blockers:
+  - statement: "Database size makes full backups slow"
+    category: resource_limit
+    intensity: 2
+    affects_claims: ["desired"]
+
+  - statement: "Cross-region transfer can fail during outages"
+    category: threat
+    intensity: 2
+    affects_claims: ["desired"]
+
+  - statement: "Encryption key rotation complexity"
+    category: skill_gap
+    intensity: 1
+    affects_claims: []
+
+boosters:
+  - statement: "Incremental backup support reduces time"
+    category: tool
+    intensity: 3
+    affects_claims: ["desired"]
+
+  - statement: "Multi-region cloud storage available"
+    category: support
+    intensity: 3
+    affects_claims: ["desired"]
+
+  - statement: "Team has DR expertise"
+    category: existing_skill
+    intensity: 2
+    affects_claims: []
+```
+
+---
+
+## THE JOB
+*The critical backup task*
+
+```yaml
+job:
+  title: "Production Database Backup"
+  type: scheduled
+
+  schedule:
+    cron: "0 */6 * * *"   # Every 6 hours
+    timezone: "UTC"
+    enabled: true
+
+  task:
+    type: script_run
+    target: "scripts/database-backup.sh"
+    params:
+      database: "production"
+      encryption: "aes-256-gcm"
+      regions:
+        - "us-east-1"
+        - "eu-west-1"
+        - "ap-southeast-1"
+      retention_days: 30
+      verify_checksum: true
+      test_restore: false  # Full restore test runs weekly, not every backup
+
+  acceptance_test: "Backup exists in all 3 regions with matching checksums"
+
+  # CRITICAL risk level = requires explicit human approval for config changes
+  risk_level: critical
+
+  heartbeat_api: "https://yawn.ai/api/heartbeat/database-backup"
+```
+
+---
+
+## DO's
+*What MUST happen?*
+
+```yaml
+rules:
+  - [ ] Encrypt all backups at rest and in transit
+        When: Always
+        Why: Compliance and security requirement
+
+  - [ ] Verify checksum after every upload
+        When: After each region upload completes
+        Why: Ensures backup integrity
+
+  - [ ] Replicate to minimum 3 geographic regions
+        When: Every backup
+        Why: Disaster recovery across region failures
+
+  - [ ] Test full restore weekly
+        When: Every Sunday at 4am UTC
+        Why: Proves recovery actually works
+
+  - [ ] Alert on any backup failure immediately
+        When: Within 5 minutes of failure
+        Why: Time-sensitive for data safety
+
+  - [ ] Retain backups for minimum 30 days
+        When: Cleanup job runs
+        Why: Point-in-time recovery window
+```
+
+---
+
+## DON'T's
+*What must NEVER happen?*
+
+```yaml
+rules:
+  - [ ] Never skip checksum verification
+        Symptom: `verify_checksum: false` in config
+        Risk: Corrupted backups discovered only during crisis
+
+  - [ ] Never store encryption keys with backups
+        Symptom: Key file in backup bucket
+        Risk: Encrypted backups become useless protection
+
+  - [ ] Never delete backups without retention policy check
+        Symptom: Manual deletion commands
+        Risk: Compliance violation, data loss
+
+  - [ ] Never run on single region only
+        Symptom: Only one region in params.regions
+        Risk: Region outage = total backup loss
+
+  - [ ] Never modify backup config without approval
+        Symptom: Config changes without PR review
+        Risk: Silent reduction in backup coverage
+```
+
+---
+
+## CHECKS
+*Automated validations*
+
+| Check | Query/Command | Pass Condition | Frequency |
+|-------|---------------|----------------|-----------|
+| Backup exists | `aws s3 ls s3://backups/$(date +%Y-%m-%d)/` | Files present | every_6_hours |
+| Checksum match | `md5sum -c backup.md5` | All OK | every_6_hours |
+| Multi-region sync | `for r in regions; do aws s3 ls s3://backups-$r/; done` | All regions have files | every_6_hours |
+| Encryption valid | `gpg --decrypt --dry-run backup.enc` | Success | daily |
+| Restore test | `pg_restore --dry-run backup.sql` | Success | weekly |
+
+---
+
+## EVALUATIONS
+*Evidence-based metrics*
+
+| Metric | Current | Target | Evidence Type | Status |
+|--------|---------|--------|---------------|--------|
+| Backup success rate | 99.8% | > 99.9% | test_log | Active |
+| Avg backup duration | 45 min | < 60 min | test_log | Complete |
+| Recovery time (tested) | 3.5 hours | < 4 hours | test_log | Complete |
+| Regions synced | 3/3 | 3/3 | artifact | Complete |
+| Retention compliance | 30 days | 30 days | artifact | Complete |
+| Encryption verified | Yes | Yes | test_log | Complete |
+
+---
+
+## COMPLETION CONDITIONS
+*When is this fulfilled?*
+
+```yaml
+fulfilled_when:
+  - [ ] 99.9% backup success rate over 90 days
+  - [ ] Recovery time proven < 4 hours in test
+  - [ ] All 3 regions consistently synced
+  - [ ] Zero data loss incidents
+
+success_metrics:
+  - "RPO (Recovery Point Objective): 6 hours"
+  - "RTO (Recovery Time Objective): 4 hours"
+  - "100% encryption compliance"
+
+timing:
+  frequency: continuous
+  deadline: null
+```
+
+---
+
+## GRADUATION CRITERIA
+*When should this spawn children?*
+
+```yaml
+spawn_child_yawn_when:
+  - complexity_lines: "> 500"
+    action: "Split into separate yawns per region"
+
+  - condition: "New database added to production"
+    action: "Create child yawn for new database backup"
+
+  - condition: "Compliance requirement (SOC2, HIPAA)"
+    action: "Create child yawn for compliance-specific evidence"
+
+spawn_skill_when:
+  - pattern_repeats: ">= 3"
+    description: "Extract backup verification patterns to reusable skill"
+
+spawn_rule_when:
+  - invariant_discovered: true
+    description: "If data safety constraint found, add to infrastructure rules"
+```
+
+---
+
+## EVOLUTION LOG
+*How has this changed?*
+
+```yaml
+- date: "2026-02-04"
+  change: "Initial creation as critical-risk example"
+  trigger: "OSS repository improvement"
+  insight: |
+    Critical jobs need maximum evidence.
+    Multi-region is non-negotiable for disaster recovery.
+    Weekly restore tests prove recovery actually works.
+    Don't discover backup problems during a crisis.
+```
+
+---
+
+## META
+*System metadata*
+
+```yaml
+created: "2026-02-04"
+last_awakened: "2026-02-04T02:00:00Z"
+status: coherent
+criticality: MAXIMUM
+forked_from: "yawn-ai/yawnjob"
+registered: false
+registration_id: null
+```
+
+---
+
+*"Data is the lifeblood. This YawnJob keeps it safe."*

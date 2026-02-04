@@ -1,0 +1,213 @@
+---
+# COHERENCE METADATA
+schema_version: 2.0.0
+coherence:
+  score: 85.0
+  last_check: "2026-02-04"
+  questions_answered: 15
+  questions_total: 18
+  status: active
+
+# NAVIGATION
+navigation:
+  parent: null
+  domain: example
+  keywords:
+    - hello-world
+    - tutorial
+    - beginner
+    - minimal
+  in_index: false
+  created_from: yawn-ai/yawnjob
+  created_by: "yawn-ai"
+  created_at: "2026-02-04"
+---
+
+# Hello World YawnJob
+
+> **Version**: 1.0.0 | **Last Updated**: 2026-02-04 | **Status**: Active
+> **Owner**: yawn-ai | **Parent**: null
+> **GitHub**: https://github.com/yawn-ai/yawnjob
+
+---
+
+## AWAKENING
+*The simplest possible YawnJob - start here.*
+
+**Intention**: Demonstrate the minimal viable YawnJob format.
+
+**Observer Story**: A developer new to YawnJobs wants to understand the basic structure before creating their own. They need a simple example that shows all required sections without overwhelming complexity.
+
+**Transformation**: From "confused about .yawn format" → To "understands basic YawnJob structure"
+
+---
+
+## ENTITIES
+*Who owns this intention?*
+
+```yaml
+subject:
+  entity_id: null
+  name: "New YawnJob User"
+  role: subject
+
+target:
+  entity_id: null
+  name: "YawnJob Format Understanding"
+  role: target
+
+other_participants:
+  - name: "yawn.ai Documentation"
+    role: helper
+```
+
+---
+
+## FORCES
+*What affects progress?*
+
+```yaml
+blockers:
+  - statement: "Too many sections in full template can overwhelm"
+    category: confusion
+    intensity: 1
+    affects_claims: []
+
+boosters:
+  - statement: "Simple example makes concepts concrete"
+    category: existing_skill
+    intensity: 2
+    affects_claims: []
+```
+
+---
+
+## THE JOB
+*What does this YawnJob do?*
+
+```yaml
+job:
+  title: "Display Hello World message"
+  type: on_demand
+
+  schedule:
+    cron: null
+    timezone: "UTC"
+    enabled: false
+
+  task:
+    type: manual
+    target: null
+    params: {}
+
+  acceptance_test: "User understands basic .yawn structure"
+
+  risk_level: read
+
+  heartbeat_api: null
+```
+
+---
+
+## DO's
+*What MUST happen?*
+
+```yaml
+rules:
+  - [x] Keep this example minimal
+        When: Updating this file
+        Why: Complexity defeats the tutorial purpose
+
+  - [x] Include all required sections
+        When: Always
+        Why: Shows complete (but simple) structure
+```
+
+---
+
+## DON'T's
+*What must NEVER happen?*
+
+```yaml
+rules:
+  - [x] Never add advanced features to this example
+        Symptom: Scheduling, complex evidence, graduation criteria
+        Risk: Confuses beginners, defeats minimal purpose
+
+  - [x] Never remove required sections
+        Symptom: Missing AWAKENING, ENTITIES, THE JOB, etc.
+        Risk: Example becomes incomplete/invalid
+```
+
+---
+
+## CHECKS
+*Automated validations*
+
+| Check | Query/Command | Pass Condition | Frequency |
+|-------|---------------|----------------|-----------|
+| Schema valid | `yawn validate hello-world.yawn` | No errors | on_commit |
+| Sections present | `grep -c "## "` | >= 10 sections | on_commit |
+
+---
+
+## EVALUATIONS
+*Evidence of success*
+
+| Metric | Current | Target | Evidence Type | Status |
+|--------|---------|--------|---------------|--------|
+| New users understand format | Yes | Yes | self_attest | Complete |
+| All required sections present | 10/10 | 10/10 | artifact | Complete |
+
+---
+
+## COMPLETION CONDITIONS
+*When is this fulfilled?*
+
+```yaml
+fulfilled_when:
+  - [x] All required sections are present
+  - [x] Example is under 150 lines
+  - [x] No advanced features included
+
+success_metrics:
+  - "New users can copy and modify"
+  - "Validates against schema v2.0.0"
+
+timing:
+  frequency: once
+  deadline: null
+```
+
+---
+
+## EVOLUTION LOG
+*How has this changed?*
+
+```yaml
+- date: "2026-02-04"
+  change: "Initial creation as minimal example"
+  trigger: "OSS repository improvement plan"
+  insight: |
+    The simplest example is often the most valuable.
+    Beginners need a clear starting point.
+```
+
+---
+
+## META
+*System metadata*
+
+```yaml
+created: "2026-02-04"
+last_awakened: null
+status: active
+criticality: LOW
+forked_from: null
+registered: false
+registration_id: null
+```
+
+---
+
+*"Hello, World. This is a YawnJob."*
