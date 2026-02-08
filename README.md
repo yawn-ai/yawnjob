@@ -1,3 +1,5 @@
+![Alt Text](/public-assets/yawnjob-banner-1.png)
+
 # YawnJob
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-amber.svg)](LICENSE)
