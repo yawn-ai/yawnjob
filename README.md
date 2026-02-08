@@ -5,7 +5,7 @@
 [![Docs](https://img.shields.io/badge/Docs-yawn.ai-purple.svg)](https://yawn.ai/docs)
 [![Discord](https://img.shields.io/badge/Discord-Join-7289da.svg)](https://discord.gg/yawn)
 
-> **AWAKEN! AWAKEN!**
+> **AWAKEN! AWAKEN! AWAKEN!**
 
 A cron job with a brain. The holonic unit of AI-native work.
 
