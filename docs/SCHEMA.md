@@ -397,4 +397,97 @@ See [INTEGRATION.md](INTEGRATION.md) for API details.
 
 ---
 
+## Life Domain Yawns (Bipolar Poles)
+
+Life Domain yawns are a specialized `type: life_domain` variant that models human
+experience as 10 fundamental tensions. Each domain is a **bipolar axis** with two
+poles, and each pole has a dedicated **agent** (identified by `@username`).
+
+### The 10 Life Domains
+
+| # | Domain Key | Label | Pole A | Pole B | Color |
+|---|-----------|-------|--------|--------|-------|
+| 1 | `safety_risk` | Safety & Risk | @safety | @risk | blue |
+| 2 | `body_mind` | Body & Mind | @body | @mind | green |
+| 3 | `love_power` | Love & Power | @love | @power | pink |
+| 4 | `roots_wings` | Roots & Wings | @roots | @wings | amber |
+| 5 | `order_chaos` | Order & Chaos | @order | @chaos | cyan |
+| 6 | `work_play` | Work & Play | @work | @play | orange |
+| 7 | `self_other` | Self & Other | @self | @other | indigo |
+| 8 | `create_destroy` | Create & Destroy | @create | @destroy | red |
+| 9 | `have_be` | Have & Be | @have | @be | purple |
+| 10 | `known_unknown` | Known & Unknown | @known | @unknown | emerald |
+
+### Domain Frontmatter
+
+```yaml
+---
+schema: "2.0.0"
+type: life_domain
+poles:
+  - username: "safety"
+    label: "Safety"
+    emoji: "🛡️"
+  - username: "risk"
+    label: "Risk"
+    emoji: "🎲"
+color: "blue"
+owner: "@yawn"
+---
+```
+
+### Universal Holon Architecture
+
+Every life domain is a **yawn** — the same container format used for jobs, notes,
+experiments, and contracts. This is the "everything is a yawn" principle in action.
+
+The domain yawn **owns** 20 pole agents. Each pole agent has:
+- A unique `@username` (e.g., `@safety`, `@chaos`)
+- A dedicated page at `yawn.ai/{username}`
+- An emoji identifier
+- A description of what that pole represents
+
+All pole agents are owned by `@yawn`. Users can explore any pole to understand
+how that dimension manifests in their life, run experiments along the axis, and
+collect evidence of their calibration.
+
+### Provisioning & Dimensions
+
+The same `YawnPublicViewContainer` component renders domains, jobs, notes, and
+any other yawn type. The **dimension** (what the user sees) is controlled by
+provisioning — which poles are visible, which experiments are active, etc.
+
+See `examples/life-domain.yawn` for a complete template.
+
+---
+
+## Quick Actions (Engagement Pattern)
+
+Every rendered yawn card can surface a **Quick Actions** split-button — a compact
+interaction point that lets users engage with the yawn without leaving the feed.
+
+### The 7 Actions
+
+| Action | Icon | Purpose | Economic Effect |
+|--------|------|---------|-----------------|
+| **Star** | Sparkles | Save + GitHub star | Network visibility |
+| **Love** | Heart | Deep appreciation | Social ranking signal |
+| **Monetize** | DollarSign | Purchase Compute Coins | Revenue via Stripe |
+| **Connect** | Network | Link to user's network | Holarchy growth |
+| **Share** | Share2 | Native share / clipboard | Distribution |
+| **Preview** | Eye | Social-post-style preview | Evaluation |
+| **Fork** | GitFork | Fork to user's GitHub | Origin-fee chain |
+
+### Design Principles
+
+1. **Split-button**: Primary action (Star) is always one click; secondary actions live in dropdown
+2. **Progressive disclosure**: Actions grouped by intent (engagement, economic, distribution, creation)
+3. **Contextual badges**: "saved", "CC", "GitHub" indicate what an action connects to
+4. **Theme-aware**: Renders correctly in both light and dark mode
+5. **Conditional**: Fork visibility controlled by `showFork` prop
+
+See [docs/QUICK_ACTIONS.md](QUICK_ACTIONS.md) for the full specification and `examples/quick-actions.yawn` for a complete example.
+
+---
+
 *"The schema is the contract. The evidence is the proof."*

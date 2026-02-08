@@ -1,0 +1,98 @@
+YAWN: FAQ Generator
+VERSION: 1.0.0
+CREATED: 2026-02-06
+STATUS: Active
+TYPE: tool
+SLUG: exploration.create.faq-section
+
+## AWAKENING
+
+**Intent**: Generate structured FAQ Q&A pairs from any public URL.
+AI reads the page content and creates the questions visitors are already asking.
+
+**Need**: Exploration
+**Verb**: Create
+**Object**: FAQ section
+**JTBD**: When I have a webpage without a FAQ section, I want to generate
+relevant questions and answers from its content, so I can improve user
+experience and reduce support burden.
+
+## TASK
+
+```yaml
+type: api_call
+target: /api/faq/generate
+method: POST
+params:
+  url: "https://example.com"
+  max_questions: 8
+auth: required
+```
+
+## SCHEDULE
+
+```yaml
+trigger: on_demand
+# Can also be scheduled:
+# cron: "0 9 * * 1"  # Every Monday at 9am
+# timezone: "UTC"
+```
+
+## EVIDENCE
+
+```yaml
+acceptance_criteria:
+  - faq_count >= 5
+  - all_answers_under_200_words: true
+  - categories_present: true
+  - source_url_matches_input: true
+
+proof_type: artifact
+artifact_type: faq
+format: json
+```
+
+## CONSTRAINTS
+
+```yaml
+max_questions: 15
+min_content_length: 50 chars
+max_content_length: 12000 chars
+supported_protocols:
+  - https
+  - http
+model: claude-sonnet-4-20250514
+provider: anthropic
+```
+
+## EXAMPLE OUTPUT
+
+```json
+{
+  "questions": [
+    {
+      "question": "What does this product do?",
+      "answer": "It helps you create structured FAQ sections from any webpage using AI.",
+      "category": "Overview"
+    },
+    {
+      "question": "How much does it cost?",
+      "answer": "Basic usage is free. AI features use Yawn Compute Coins.",
+      "category": "Pricing"
+    }
+  ],
+  "source_url": "https://example.com",
+  "generated_at": "2026-02-06T12:00:00Z"
+}
+```
+
+## HOLARCHY
+
+```yaml
+parent: ROOT_OBJECTIVE
+need: exploration
+job_kinds:
+  - create
+  - research
+children: []
+```

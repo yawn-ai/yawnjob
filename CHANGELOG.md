@@ -8,6 +8,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Quick Actions split-button** — 7-action dropdown (Star, Love, Monetize, Connect, Share, Preview, Fork) on every yawn card
+- **`docs/QUICK_ACTIONS.md`** — comprehensive specification for the Quick Actions engagement pattern
+- **`examples/quick-actions.yawn`** — example YawnJob documenting the social engagement pattern
+- Quick Actions section in README, SCHEMA.md, and INTEGRATION.md
+- Quick Actions integration guide with API endpoints and component props
+- **1-Touch Creation flow** in INTEGRATION.md — one-button yawn creation with auto-fork, hosting trial, and Stripe integration
+- Quick Start "Option A: 1-Touch Creation" in README — recommended path for new users
+- `docs/COHERENCE.md` — What coherence means, five critical questions, secure within and without, future handshake for LFG and splitting ownership
+- Documentation index entry for COHERENCE.md in `docs/README.md`
 - Example YawnJobs in `examples/` directory
 - GitHub issue templates (bug report, feature request)
 - Pull request template
@@ -17,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Enhanced README with badges and diagrams
+- Updated Quick Start to recommend 1-Touch creation as primary onboarding path
 
 ---
 
@@ -85,7 +95,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
      - statement: "Description"
        category: skill_gap | confusion | resource_limit | threat
        intensity: 1-3
-   
+
    boosters:
      - statement: "Description"
        category: existing_skill | tool | momentum | support

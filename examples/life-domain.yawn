@@ -1,0 +1,119 @@
+---
+schema: "2.0.0"
+type: life_domain
+coherence: 85
+status: active
+navigation:
+  parent: ROOT.yawn
+  children: []
+  related: []
+poles:
+  - username: "{{POLE_A_USERNAME}}"
+    label: "{{POLE_A_LABEL}}"
+    emoji: "{{POLE_A_EMOJI}}"
+  - username: "{{POLE_B_USERNAME}}"
+    label: "{{POLE_B_LABEL}}"
+    emoji: "{{POLE_B_EMOJI}}"
+color: "{{COLOR}}"
+owner: "@yawn"
+---
+
+# {{POLE_A_LABEL}} & {{POLE_B_LABEL}}
+
+> A bipolar life domain representing the fundamental tension between
+> {{POLE_A_LABEL}} and {{POLE_B_LABEL}} in human experience.
+
+## AWAKENING
+
+**Intent**: Help humans navigate the tension between {{POLE_A_LABEL}} ({{POLE_A_EMOJI}})
+and {{POLE_B_LABEL}} ({{POLE_B_EMOJI}}).
+
+**Transformation**: From unconscious oscillation between poles →
+To conscious calibration of where you want to be on this axis.
+
+## ENTITIES
+
+- **@{{POLE_A_USERNAME}}** — Agent for the {{POLE_A_LABEL}} pole
+- **@{{POLE_B_USERNAME}}** — Agent for the {{POLE_B_LABEL}} pole
+- **@yawn** — Owner/orchestrator of all life domains
+
+## THE JOB
+
+Every human navigates this tension daily. The job-to-be-done is:
+1. **Sense** — Where am I on this axis right now?
+2. **Map** — What forces are pulling me toward each pole?
+3. **Surface** — What internal voices argue for each side?
+4. **Explore** — What moves are available?
+5. **Decide** — Where do I want to be?
+6. **Act** — Commit to a calibration
+7. **Prove** — Track evidence of the shift
+
+## DO's
+
+- Present both poles as valuable (no pole is "better")
+- Help users identify which pole they're neglecting
+- Suggest experiments that explore the under-expressed pole
+- Track evidence of successful calibration
+
+## DON'T's
+
+- Don't pathologize either pole
+- Don't assume one pole is the "healthy" one
+- Don't push users toward a pole they're not ready for
+- Don't ignore the context (some situations call for one pole)
+
+## CHECKS
+
+- [ ] Both poles represented with equal dignity
+- [ ] At least one experiment per pole
+- [ ] Evidence chain connects to real behavioral change
+- [ ] User's current position on axis is tracked
+
+## EVALUATIONS
+
+- User can articulate their position on this axis
+- User has run at least one experiment per pole
+- User reports increased agency in navigating this tension
+
+## COMPLETION CONDITIONS
+
+This domain is never "complete" — it's a lifelong calibration.
+Graduation happens when the user can:
+1. Name their default pole
+2. Consciously choose to shift when needed
+3. Teach someone else about this tension
+
+## EVOLUTION LOG
+
+| Date | Change | Insight |
+|------|--------|---------|
+| 2026-02-05 | v1.0.0 - Initial template | 10 bipolar life domains defined |
+
+## META
+
+```yaml
+created: 2026-02-05
+version: 1.0.0
+template: true
+instances: 10
+```
+
+---
+
+### The 10 Life Domains
+
+| # | Domain | Pole A | Pole B | Color |
+|---|--------|--------|--------|-------|
+| 1 | Safety & Risk | 🛡️ @safety | 🎲 @risk | blue |
+| 2 | Body & Mind | 💪 @body | 🧠 @mind | green |
+| 3 | Love & Power | ❤️ @love | ⚡ @power | pink |
+| 4 | Roots & Wings | 🏡 @roots | 🦅 @wings | amber |
+| 5 | Order & Chaos | 📐 @order | 🌊 @chaos | cyan |
+| 6 | Work & Play | ⚒️ @work | 🎭 @play | orange |
+| 7 | Self & Other | 🪞 @self | 🤝 @other | indigo |
+| 8 | Create & Destroy | 🎨 @create | 🔥 @destroy | red |
+| 9 | Have & Be | 💎 @have | ✨ @be | purple |
+| 10 | Known & Unknown | 📖 @known | 🔮 @unknown | emerald |
+
+All 20 pole agents are owned by **@yawn** and accessible via their
+respective `/@username` pages (e.g., `yawn.ai/self`, `yawn.ai/chaos`).

@@ -8,7 +8,10 @@ Welcome to the YawnJob documentation. This folder contains comprehensive guides 
 |----------|-------------|----------|
 | [WHITEPAPER.md](WHITEPAPER.md) | The landscape of autonomous AI and where YawnJob fits | Everyone |
 | [SCHEMA.md](SCHEMA.md) | Complete .yawn file format reference | Developers |
+| [COHERENCE.md](COHERENCE.md) | What coherence means, five critical questions, secure within and without | Everyone |
 | [INTEGRATION.md](INTEGRATION.md) | API reference and connection guide | Developers |
+| [EARNING.md](EARNING.md) | How to earn Yawn Coins (YC) | Creators |
+| [QUICK_ACTIONS.md](QUICK_ACTIONS.md) | Quick Actions split-button specification | Developers |
 
 ## Quick Navigation
 
@@ -48,6 +51,14 @@ The definitive reference for .yawn files:
 - YAML syntax and validation rules
 - Evidence types and risk levels
 
+### COHERENCE.md
+
+How to keep your YawnJob coherent:
+- The five critical questions every ROOT.yawn should answer
+- Secure within and without (holarchy boundaries)
+- Tool-agnostic self-check
+- Future: handshake for LFG and splitting ownership
+
 ### INTEGRATION.md
 
 How to connect YawnJobs to yawn.ai:
@@ -55,6 +66,23 @@ How to connect YawnJobs to yawn.ai:
 - Database schema overview
 - Heartbeat API for scheduled jobs
 - Evidence submission endpoints
+
+### EARNING.md
+
+How to earn Yawn Coins (YC) on the network:
+- Sell proven yawns on yawn.shop
+- Receive tips on projects and comments
+- Earn 5% origin fees on cloned yawns
+- Complete OSS bounties
+
+### QUICK_ACTIONS.md
+
+The Quick Actions split-button specification:
+- 7 actions: Star, Love, Monetize, Connect, Share, Preview, Fork
+- Split-button design pattern (primary + dropdown)
+- Integration with existing systems (Action Bar, Preview Modal, Stripe)
+- Component architecture and props reference
+- Accessibility and theming guidelines
 
 ## Contributing to Docs
 

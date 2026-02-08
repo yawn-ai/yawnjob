@@ -1,0 +1,342 @@
+---
+# COHERENCE METADATA
+schema_version: 2.0.0
+coherence:
+  score: 90.0
+  last_check: "2026-02-06"
+  questions_answered: 16
+  questions_total: 18
+  status: coherent
+
+# NAVIGATION
+navigation:
+  parent: null
+  domain: engagement
+  keywords:
+    - quick-actions
+    - social
+    - star
+    - fork
+    - monetize
+    - share
+    - connect
+    - dropdown
+    - split-button
+    - engagement
+  in_index: false
+  created_from: yawn-ai/yawnjob
+  created_by: "yawn-ai"
+  created_at: "2026-02-06"
+---
+
+# Quick Actions — Social Engagement Pattern
+
+> **Version**: 1.0.0 | **Last Updated**: 2026-02-06 | **Status**: Coherent
+> **Owner**: yawn-ai | **Parent**: null
+> **GitHub**: https://github.com/yawn-ai/yawnjob
+
+---
+
+## AWAKENING
+*Every yawn deserves an audience. Quick Actions make engagement effortless.*
+
+**Intention**: Provide a single, compact interaction point that lets users star, love, monetize, connect, share, preview, and fork any yawn — collapsing the distance between seeing and doing.
+
+**Observer Story**: A visitor lands on a yawn card in the feed. They're impressed by the content but there's no obvious way to save it, share it, or build on it. The Quick Actions split-button solves this by surfacing 7 engagement actions behind a familiar star icon with a dropdown chevron. The star is the primary action (one click); everything else is one click in the dropdown.
+
+**Transformation**: From "passive reader who scrolls past" → To "active participant who stars, shares, pays, or forks"
+
+---
+
+## ENTITIES
+*Who owns this intention?*
+
+```yaml
+subject:
+  entity_id: null
+  name: "Yawn.ai Platform"
+  role: subject
+
+target:
+  entity_id: null
+  name: "Yawn Card Visitors"
+  role: target
+
+other_participants:
+  - name: "GitHub API"
+    role: executor
+  - name: "Stripe Checkout"
+    role: executor
+  - name: "Navigator.share API"
+    role: executor
+```
+
+---
+
+## CLAIMS
+*Current state and evidence*
+
+```yaml
+current:
+  - domain: "engagement"
+    statement: "Users have no quick way to act on yawn content"
+    evidence: []
+    confidence: 0.3
+
+desired:
+  - domain: "engagement"
+    statement: "Every yawn card has a 7-action split-button dropdown"
+    evidence:
+      - type: artifact
+        content: "YawnStarButton component with DropdownMenu"
+    confidence: 0.9
+```
+
+---
+
+## FORCES
+*What affects progress?*
+
+```yaml
+blockers:
+  - statement: "Users don't notice tiny buttons in corners"
+    category: confusion
+    intensity: 2
+    affects_claims: ["engagement"]
+
+  - statement: "Too many actions can overwhelm"
+    category: confusion
+    intensity: 1
+    affects_claims: ["engagement"]
+
+boosters:
+  - statement: "Split-button pattern is familiar from GitHub and Figma"
+    category: existing_skill
+    intensity: 3
+    affects_claims: ["engagement"]
+
+  - statement: "Each action has a distinct color accent on hover"
+    category: tool
+    intensity: 2
+    affects_claims: ["engagement"]
+
+  - statement: "Progressive disclosure groups actions by intent"
+    category: existing_skill
+    intensity: 2
+    affects_claims: ["engagement"]
+```
+
+---
+
+## THE JOB
+*What does this YawnJob do?*
+
+```yaml
+job:
+  title: "Render Quick Actions split-button on every yawn card"
+  type: continuous
+
+  schedule:
+    cron: null
+    timezone: "UTC"
+    enabled: false
+
+  task:
+    type: agent_invoke
+    target: "YawnStarButton component"
+    params:
+      actions:
+        - star
+        - love
+        - monetize
+        - connect
+        - share
+        - preview
+        - fork
+
+  acceptance_test: "All 7 actions render correctly in both light and dark themes, each triggers its intended callback, and the split-button maintains the star sparkle animation"
+
+  risk_level: read
+
+  heartbeat_api: null
+```
+
+---
+
+## DO's
+*What MUST happen?*
+
+```yaml
+rules:
+  - [x] Primary action (Star) must ALWAYS be one click — never buried
+        When: Rendering the split-button
+        Why: Star is the most frequent action and should never require two clicks
+
+  - [x] Group dropdown items by intent with separators
+        When: Building the dropdown menu
+        Why: Progressive disclosure helps users scan quickly
+
+  - [x] Show contextual badges (saved, CC, GitHub) where relevant
+        When: Action has additional context
+        Why: Reduces cognitive load — users know what they're clicking into
+
+  - [x] Respect theme variants (light/dark) throughout
+        When: Rendering any Quick Action element
+        Why: Visual consistency with the rest of the platform
+
+  - [x] Use optimistic updates for Star and Love
+        When: User clicks star or heart
+        Why: Instant feedback feels snappy — revert on API failure
+
+  - [x] Provide auth toast for unauthenticated users
+        When: User clicks an action requiring auth
+        Why: Friendly prompt to sign in rather than silent failure
+```
+
+---
+
+## DON'T's
+*What must NEVER happen?*
+
+```yaml
+rules:
+  - [x] Never hide the star icon — it's the primary engagement signal
+        Symptom: Star button missing from a yawn card
+        Risk: Users can't save or engage, breaking the signal loop
+
+  - [x] Never require two clicks for the primary action
+        Symptom: Star only available inside the dropdown
+        Risk: Friction kills engagement — 2 clicks vs 1 click is 50% drop
+
+  - [x] Never mix economic actions with reactions
+        Symptom: Monetize and Love in the same visual group
+        Risk: Users accidentally spend money thinking they're reacting
+
+  - [x] Never auto-fork without user intent
+        Symptom: Fork triggered by star or other action
+        Risk: Unwanted repos in user's GitHub account
+
+  - [x] Never break the sparkle animation on star
+        Symptom: Star clicks but no visual feedback
+        Risk: Feels broken, reduces satisfaction
+```
+
+---
+
+## CHECKS
+*Automated validations*
+
+| Check | Query/Command | Pass Condition | Frequency |
+|-------|---------------|----------------|-----------|
+| Component renders | `npm run typecheck` | No type errors in yawn-star-button.tsx | on_commit |
+| Theme variants | Visual regression test | Both light and dark render correctly | on_deploy |
+| All 7 actions | Manual click test | Each action fires its callback | on_deploy |
+| Auth gate | Click while logged out | Toast appears with sign-in prompt | on_deploy |
+| Dropdown accessibility | aXe scan | No WCAG violations | on_deploy |
+| Star API | POST /api/yawns/star | Returns 200 with starred: true | on_deploy |
+
+---
+
+## EVALUATIONS
+*Evidence of success*
+
+| Metric | Current | Target | Evidence Type | Status |
+|--------|---------|--------|---------------|--------|
+| Actions render correctly | 7/7 | 7/7 | screenshot | Complete |
+| Star optimistic update works | Yes | Yes | test_log | Complete |
+| Auth toast shows for guests | Yes | Yes | test_log | Complete |
+| Theme variants consistent | 2/2 | 2/2 | screenshot | Complete |
+| Dropdown groups separated | 4 groups | 4 groups | artifact | Complete |
+| Fork opens CreateYawnModal | Yes | Yes | test_log | Complete |
+| Monetize opens CoinPurchaseModal | Yes | Yes | test_log | Complete |
+
+---
+
+## COMPLETION CONDITIONS
+*When is this fulfilled?*
+
+```yaml
+fulfilled_when:
+  - [x] Split-button renders on all yawn cards (8 instances on landing page)
+  - [x] Star action saves to database and stars GitHub repo
+  - [x] Dropdown contains all 7 actions with correct icons
+  - [x] Actions are grouped by intent with separators
+  - [x] Theme variants (light/dark) work correctly
+  - [x] Auth toast appears for unauthenticated users
+  - [x] Monetize opens Stripe checkout via CoinPurchaseModal
+  - [x] Fork opens GitHub fork flow via CreateYawnModal
+  - [ ] Preview opens social-post-style modal
+  - [ ] Connect links yawn to user's network (future)
+  - [ ] Love persists via API (currently client-side only)
+
+success_metrics:
+  - "Star rate increases 20% after dropdown launch"
+  - "Fork rate increases 10% after dropdown launch"
+  - "Monetize clicks increase 15% after dropdown launch"
+
+timing:
+  frequency: continuous
+  deadline: null
+```
+
+---
+
+## GRADUATION CRITERIA
+*When to spawn children or skills*
+
+```yaml
+spawn_child_yawn_when:
+  - action_count: "> 10"
+    description: "If Quick Actions grow beyond 10, split into categories"
+  - complexity_lines: "> 500"
+    description: "Component file too large — extract sub-components"
+
+spawn_skill_when:
+  - pattern_repeats: ">= 3"
+    description: "Split-button with dropdown used in 3+ places"
+
+spawn_rule_when:
+  - invariant_discovered: true
+    description: "Primary action must never be buried in dropdown"
+```
+
+---
+
+## EVOLUTION LOG
+*How has this changed?*
+
+```yaml
+- date: "2026-02-06"
+  change: "Initial creation — 7-action split-button dropdown"
+  trigger: "Need for compact social engagement on yawn cards"
+  insight: |
+    The split-button pattern is critical for engagement. By separating
+    the primary action (Star) from secondary actions (dropdown), we
+    maintain a low-friction primary path while offering rich functionality.
+
+    Grouping actions by intent (engagement, economic, distribution,
+    creation) with visual separators prevents cognitive overload.
+
+    Key learning: The fork action creates an origin-fee chain, making
+    every fork economically connected to the original author. This
+    turns social engagement into network economics.
+```
+
+---
+
+## META
+*System metadata*
+
+```yaml
+created: "2026-02-06"
+last_awakened: "2026-02-06"
+status: coherent
+criticality: HIGH
+forked_from: null
+registered: false
+registration_id: null
+```
+
+---
+
+*"Every click is a vote. Quick Actions make voting effortless."*

@@ -10,6 +10,8 @@ Real-world examples to help you get started with YawnJobs.
 | [daily-security-audit.yawn](daily-security-audit.yawn) | Scheduled security checks | `read` | Scheduled |
 | [content-sync.yawn](content-sync.yawn) | Sync content with approval | `write` | On-demand |
 | [database-backup.yawn](database-backup.yawn) | Critical backup job | `critical` | Scheduled |
+| [life-domain.yawn](life-domain.yawn) | Bipolar pole template | `read` | Continuous |
+| [quick-actions.yawn](quick-actions.yawn) | Social engagement pattern | `read` | Continuous |
 
 ## How to Use
 
@@ -44,7 +46,7 @@ Each example demonstrates different aspects of the YawnJob format:
 - **Shows**: Minimal required sections, on-demand execution
 - **Risk**: `read` (no approval needed)
 
-### daily-security-audit.yawn  
+### daily-security-audit.yawn
 - **Purpose**: Scheduled maintenance task
 - **Shows**: Cron scheduling, evidence tracking, multiple checks
 - **Risk**: `read` (safe to run automatically)
@@ -89,6 +91,16 @@ schedule:
 - link        # URL to external proof
 - self_attest # Human attestation
 ```
+
+### quick-actions.yawn
+- **Purpose**: Social engagement on yawn cards
+- **Shows**: 7-action split-button dropdown, economic integration, theme variants
+- **Risk**: `read` (engagement signals, no data modification)
+
+### life-domain.yawn
+- **Purpose**: Bipolar pole template for life dimensions
+- **Shows**: Life domain schema, pole agents, dimension provisioning
+- **Risk**: `read` (self-model exploration)
 
 ## Need Help?
 

@@ -271,7 +271,7 @@ registration_id: null  # UUID from yawn.ai after import
 
 *"A YawnJob is a holonic, AI-native, super-capable Job-to-be-Done. This is one."*
 
-<!-- 
+<!--
 INSTRUCTIONS:
 1. Replace all {{PLACEHOLDERS}} with your actual values
 2. Delete sections you don't need (but keep the core ones)
@@ -282,4 +282,6 @@ INSTRUCTIONS:
 
 See docs/SCHEMA.md for detailed syntax reference.
 See docs/INTEGRATION.md for API details.
+
+The yawn.ai/yawnjob explainer page mirrors this repo's README and includes an About sidebar (License, Schema, links).
 -->

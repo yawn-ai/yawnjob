@@ -20,7 +20,7 @@ A **YawnJob** is a holonic, AI-native, super-capable Job-to-be-Done.
 Think of it as the fundamental unit of work that bridges human intention and AI execution. Unlike traditional cron jobs that blindly run commands, a YawnJob knows:
 
 - **WHY** it exists (intention)
-- **WHAT** blocks success (obstacles)  
+- **WHAT** blocks success (obstacles)
 - **HOW** to prove it worked (evidence)
 - **WHAT** it learned (insights)
 
@@ -31,7 +31,7 @@ flowchart LR
     C --> D[Evidence]
     D --> E[Learning]
     E -.-> A
-    
+
     style A fill:#f9f,stroke:#333
     style B fill:#ff9,stroke:#333
     style C fill:#9ff,stroke:#333
@@ -61,7 +61,7 @@ Every YawnJob has exactly 5 layers:
 
 ```yaml
 1. INTENTION   # What you want to be true
-2. OBSTACLES   # What blocks progress  
+2. OBSTACLES   # What blocks progress
 3. JOB         # The action to take (scheduled or on-demand)
 4. EVIDENCE    # Proof it worked
 5. LEARNING    # What we learned (graduates to skills/rules)
@@ -81,7 +81,7 @@ flowchart LR
     A --> P[✅ PROVE]
     P --> L[📚 LEARN]
     L -.-> S
-    
+
     style S fill:#ffeaa7
     style M fill:#74b9ff
     style PR fill:#a29bfe
@@ -116,7 +116,7 @@ graph TD
     TEAM1 --> JOB2[📋 Related Job]
     JOB1 --> CHILD1[📝 Sub-task 1]
     JOB1 --> CHILD2[📝 Sub-task 2]
-    
+
     style JOB1 fill:#ff9,stroke:#f90,stroke-width:3px
 ```
 
@@ -126,17 +126,28 @@ When a YawnJob grows too complex (>500 lines, 3+ domains), it **graduates** by s
 
 ## Quick Start
 
-### 1. Fork this repository
+### Option A: 1-Touch Creation (Recommended)
+
+The fastest way — one button, everything automated:
+
+1. Sign in to [yawn.ai](https://yawn.ai) with GitHub
+2. Tap **"New Yawn"** in the sidebar
+3. Type a repo name (validated in real-time)
+4. Tap **"Create — Start Free"**
+
+That's it. Your YawnJob is forked, hosted, and live with 30 days of free hosting. No credit card required. [Learn more →](https://yawn.ai/one-touch-yawnjob)
+
+### Option B: Manual Fork
 
 ```bash
-# Option A: Via GitHub UI
+# Option B1: Via GitHub UI
 # Click "Fork" button above
 
-# Option B: Via gh CLI  
+# Option B2: Via gh CLI
 gh repo fork yawn-ai/yawnjob --clone
 ```
 
-### 2. Configure ROOT.yawn
+### Configure ROOT.yawn
 
 Open `ROOT.yawn` and replace all `{{PLACEHOLDERS}}`:
 
@@ -150,7 +161,7 @@ title: "Daily Security Audit"
 intention: "All production endpoints pass security checks every morning"
 ```
 
-### 3. Import to yawn.ai
+### Import to yawn.ai
 
 1. Go to [yawn.ai](https://yawn.ai) and sign in with GitHub
 2. Navigate to Dashboard
@@ -242,18 +253,18 @@ graph TD
         PC --> ENTITIES[Entities]
         PC --> DOMAIN[Domain Knowledge]
     end
-    
+
     subgraph This YawnJob
         TJ[This .yawn]
         TJ --> LOCAL_RULES[Local Rules]
         TJ --> LOCAL_ENT[Local Entities]
         TJ --> JOB[Job Definition]
     end
-    
+
     RULES -.->|inherited| LOCAL_RULES
     ENTITIES -.->|extended| LOCAL_ENT
     DOMAIN -.->|available| JOB
-    
+
     style TJ fill:#ff9,stroke:#333
     style PC fill:#9ff,stroke:#333
 ```
@@ -300,6 +311,31 @@ navigation:
 | `screenshot` | Visual proof | UI before/after |
 | `link` | URL to external proof | GitHub commit, Notion page |
 | `self_attest` | Human attestation | "I verified this manually" |
+
+---
+
+## Quick Actions
+
+Every yawn card surfaces a **Quick Actions** split-button — a compact, one-click engagement point:
+
+```
+┌───────────────────────────────────┐
+│        Yawn Card Content          │
+│                      [ ✦ | ▾ ]   │  ← Star (primary) + Dropdown (7 actions)
+└───────────────────────────────────┘
+```
+
+| Action | What It Does |
+|--------|-------------|
+| **Star** | Save the yawn + star on GitHub |
+| **Love** | Express deep appreciation |
+| **Monetize** | Purchase Compute Coins (YCC) |
+| **Connect** | Link to your yawn network |
+| **Share** | Share via native share or clipboard |
+| **Preview** | Preview like a social post |
+| **Fork** | Fork to your own GitHub (creates origin-fee chain) |
+
+Star is always one click. Everything else is in the dropdown. See [docs/QUICK_ACTIONS.md](docs/QUICK_ACTIONS.md) for the full specification.
 
 ---
 
@@ -358,6 +394,47 @@ See [docs/INTEGRATION.md](docs/INTEGRATION.md) for full API reference.
 
 ---
 
+## Independent Hosting (NEW)
+
+YawnJobs can be hosted **anywhere** — Vercel, Netlify, Cloudflare, self-hosted — while connecting back to the yawn.ai network securely. The `connect/` directory contains a zero-dependency SDK for this.
+
+### YawnConnect SDK
+
+```typescript
+import { YawnConnect } from './connect/yawn-connect'
+
+const yawn = new YawnConnect({
+  apiKey: process.env.YAWN_API_KEY!,  // yawn_sk_... (server-side only)
+  yawnSlug: 'my-yawnjob',
+})
+
+// Establish link to parent yawn
+await yawn.handshake('parent-slug', 'child')
+
+// Query connected yawns
+const links = await yawn.getLinks()
+
+// Submit evidence of work
+await yawn.submitEvidence('yawn-uuid', {
+  type: 'link',
+  content: 'Deployment verified',
+  proof_url: 'https://my-site.com',
+})
+
+// Health check
+const status = await yawn.ping()
+```
+
+**Security**: API keys are SHA-256 hashed at rest. Never expose keys to client-side code. All requests over HTTPS. Scoped access only to connected yawns.
+
+See [connect/README.md](connect/README.md) for full API reference.
+
+### Real-World Example
+
+See [examples/trademark-bitch.yawn](examples/trademark-bitch.yawn) — a live, independently hosted yawnjob that sells trademark filing services while constituting its own specimen of commercial use.
+
+---
+
 ## File Structure
 
 ```
@@ -372,17 +449,26 @@ yawnjob/
 ├── .github/
 │   ├── ISSUE_TEMPLATE/    # Bug report & feature request forms
 │   └── PULL_REQUEST_TEMPLATE.md
+├── connect/
+│   ├── yawn-connect.ts    # Zero-dep SDK for network connection
+│   └── README.md          # SDK documentation
 ├── docs/
 │   ├── README.md          # Documentation index
 │   ├── WHITEPAPER.md      # The landscape of autonomous AI
 │   ├── SCHEMA.md          # .yawn file format reference
-│   └── INTEGRATION.md     # API and connection guide
+│   ├── INTEGRATION.md     # API and connection guide
+│   ├── COHERENCE.md       # What coherence means
+│   ├── EARNING.md         # How to earn Yawn Coins
+│   └── QUICK_ACTIONS.md   # Quick Actions specification
 ├── examples/
 │   ├── README.md          # Examples guide
 │   ├── hello-world.yawn   # Minimal example
 │   ├── daily-security-audit.yawn  # Scheduled job
 │   ├── content-sync.yawn  # Write-risk example
-│   └── database-backup.yawn       # Critical job
+│   ├── database-backup.yawn       # Critical job
+│   ├── life-domain.yawn   # Bipolar pole template
+│   ├── quick-actions.yawn # Social engagement pattern
+│   └── trademark-bitch.yawn # Independently hosted yawnjob (real-world)
 └── evidence/
     └── README.md          # Evidence storage guide
 ```
@@ -391,7 +477,7 @@ yawnjob/
 
 ## The Network
 
-Every forked YawnJob becomes part of the yawn.ai network. 
+Every forked YawnJob becomes part of the yawn.ai network.
 
 Check [yawn.ai/yawn-network](https://yawn.ai/yawn-network) to see the job network.
 
@@ -424,6 +510,14 @@ The more jobs that connect, the more coherent we become.
 Created by [yawn.ai](https://github.com/yawn-ai)
 
 Built with love, Claude, and the belief that AI agents deserve purpose.
+
+### Required Footer
+
+All YawnJob pages must display the global footer:
+
+> A secure open source [yawnjob.com](https://yawnjob.com) powered by [yawn.ai](https://yawn.ai)
+
+See [docs/INTEGRATION.md](docs/INTEGRATION.md#global-footer-required) for implementation details.
 
 **Yawn is your next move.**
 

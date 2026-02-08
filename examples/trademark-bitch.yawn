@@ -1,0 +1,245 @@
+---
+# COHERENCE METADATA
+schema_version: 2.0.0
+coherence:
+  score: 72.0
+  last_check: 2026-02-08
+  questions_answered: 13
+  questions_total: 18
+  status: coherent
+
+# NAVIGATION
+navigation:
+  parent: yawn-ai/yawnjob  # Forked from OSS template
+  domain: business
+  keywords:
+    - trademark
+    - filing
+    - specimen-of-use
+    - common-law
+    - nice-classification
+    - lanham-act
+    - proof-of-commerce
+  in_index: true
+  created_from: yawn-ai/yawnjob
+  created_by: yawn
+  created_at: 2026-02-08
+---
+
+# Trademark B!tch — Independently Hosted YawnJob
+
+> **Version**: 1.0.0 | **Last Updated**: 2026-02-08 | **Status**: Active
+> **Owner**: yawn.ai | **Hosted**: github.com/yawn-ai/trademark-bitch
+
+---
+
+## AWAKENING
+*What is this organism trying to become?*
+
+**Intention**: Serve as both a commercial service AND a living specimen of
+use in commerce for the "Trademark Bitch" mark. This yawnjob dogfoods its
+own product — by offering trademark filing services, it becomes documentary
+evidence of commercial use.
+
+**Transformation**: From an abstract trademark concept to a live,
+revenue-generating, legally significant proof page that teaches users about
+trademark law while protecting their brands.
+
+**Why It Matters**: The page itself is the proof. Every view, every purchase,
+every GitHub commit creates verifiable evidence of commercial use under the
+Lanham Act (15 U.S.C. 1051 et seq.).
+
+---
+
+## ENTITIES
+
+```yaml
+subject:
+  name: "Trademark B!tch Service"
+  role: product
+  hosted_at: "yawn.ai/trademark-bitch"
+  repo: "github.com/yawn-ai/trademark-bitch"
+
+target:
+  name: "Founders who need trademark protection"
+  role: customer
+
+network:
+  name: "Yawn.ai Network"
+  role: platform
+  connection: "yawn_sk_ API key via YawnConnect SDK"
+```
+
+---
+
+## FORCES
+
+```yaml
+blockers:
+  - statement: "Traditional trademark filing is expensive ($250-$350 per class)"
+    category: resource_limit
+    intensity: 3
+
+  - statement: "Common law rights are poorly understood"
+    category: skill_gap
+    intensity: 2
+
+boosters:
+  - statement: "First-mover advantage on common-law digital trademark claims"
+    category: market_position
+    intensity: 3
+
+  - statement: "Self-dogfooding — the page IS the specimen"
+    category: existing_skill
+    intensity: 3
+
+  - statement: "GitHub version control = tamper-evident audit trail"
+    category: tool
+    intensity: 2
+```
+
+---
+
+## THE JOB
+
+```yaml
+job:
+  type: on_demand
+  task: "Process trademark filing requests across Nice Classification classes"
+
+  tiers:
+    - name: "Single Class"
+      price_cents: 100
+      classes: 1
+      description: "File claim for one specific Nice Classification class"
+
+    - name: "Related Classes"
+      price_cents: 2000
+      classes: 20
+      description: "File claims for ~20 classes related to your primary class"
+
+    - name: "Full Coverage"
+      price_cents: 10000
+      classes: 45
+      description: "File claims across all 45 Nice Classification classes"
+
+  deliverables:
+    - "Published proof page at yawn.ai/{brand}/class-{N}-proof"
+    - "GitHub-versioned record (tamper-evident)"
+    - "Timestamped Stripe receipt"
+    - "Common law rights documentation"
+
+  acceptance_test: "Customer receives proof page URL within 24 hours of payment"
+```
+
+---
+
+## INDEPENDENT HOSTING
+
+This yawnjob is designed to run independently while connecting back to the
+yawn.ai network. The connection is established via the YawnConnect SDK.
+
+```yaml
+hosting:
+  platform: "Any (Vercel, Netlify, Cloudflare, self-hosted)"
+  repo: "github.com/yawn-ai/trademark-bitch"
+  connection:
+    sdk: "connect/yawn-connect.ts"
+    auth: "yawn_sk_ API key (SHA-256 hashed on yawn.ai)"
+    endpoints:
+      handshake: "POST /api/enterprise/handshake"
+      links: "GET /api/yawn/link?slug=trademark-bitch"
+      evidence: "POST /api/yawn/{id}/evidence"
+      export: "GET /api/yawn/{id}/export"
+  security:
+    - "API key server-side only (never in client bundle)"
+    - "All requests over HTTPS"
+    - "Scoped access via bidirectional yawn_links"
+    - "Rate limited per key"
+    - "Full audit trail in inbox_items"
+```
+
+---
+
+## DO's
+
+- DO maintain the page as a live specimen of commercial use
+- DO connect via YawnConnect SDK for network access
+- DO keep API keys in environment variables only
+- DO submit evidence after each customer transaction
+- DO version all changes via GitHub commits (proof chain)
+
+---
+
+## DON'T's
+
+- DON'T expose yawn_sk_ API key in client-side code
+- DON'T claim federal registration without actual filing
+- DON'T break the connection to the yawn.ai network
+- DON'T skip evidence submission (breaks coherence score)
+- DON'T remove the proof-of-use section (architecturally core)
+
+---
+
+## CHECKS
+
+- [ ] YawnConnect SDK imported and configured
+- [ ] API key stored in environment variable (not in code)
+- [ ] Handshake established with parent yawn
+- [ ] Stripe checkout flow functional (3 tiers)
+- [ ] Proof pages generated for each purchase
+- [ ] Evidence submitted on each transaction
+- [ ] GitHub commits timestamped for audit trail
+
+---
+
+## EVALUATIONS
+
+| Metric | Current | Target | Evidence Type | Status |
+|--------|---------|--------|---------------|--------|
+| Revenue | $0 | $100/mo | link (Stripe) | Active |
+| Classes filed | 0 | 45 | artifact | Active |
+| Network links | 1 | 5+ | self_attest | Active |
+| Coherence score | 72% | 90%+ | self_attest | Active |
+
+---
+
+## COMPLETION CONDITIONS
+
+```yaml
+fulfilled_when:
+  - Revenue generated from at least 10 customers
+  - All 45 Nice Classification classes have proof pages
+  - Coherence score >= 90%
+  - At least 3 yawn network links established
+  - GitHub commit history > 90 days (continuous use evidence)
+```
+
+---
+
+## EVOLUTION LOG
+
+```yaml
+- date: 2026-02-08
+  change: "Initial creation as independently hosted yawnjob example"
+  trigger: "Need to demonstrate holon independence pattern"
+  insight: |
+    A yawnjob that sells trademark filings while itself constituting
+    a specimen of use is the perfect example of self-referential
+    coherence. The product IS the proof.
+```
+
+---
+
+## META
+
+```yaml
+created: 2026-02-08
+last_awakened: 2026-02-08
+status: active
+criticality: HIGH
+schema_version: 2.0.0
+yawn_id: "10bf0b84-fb3f-4625-9e46-2f8e41d78cba"
+network_slug: "trademark-bitch"
+github_repo: "yawn-ai/trademark-bitch"
+```
