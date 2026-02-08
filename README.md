@@ -1,4 +1,4 @@
-![Alt Text](/public-assets/yawnjob-banner-1.png)
+![Alt Text](/yawnjob_screen_tear_transparent.png)
 
 # YawnJob
 
