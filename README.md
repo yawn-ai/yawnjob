@@ -7,7 +7,7 @@
 
 > **AWAKEN! AWAKEN! AWAKEN!**
 
-A cron job with a brain. The holonic unit of AI-native work.
+A super-intelligent cron job, that also is an AI Native, lightweight full stack digital organism, that also has been meticulously designed to remove reside in your cognition from unfinished projects. A psychotechnology for the AI era.
 
 [Website](https://yawn.ai) | [Whitepaper](https://yawn.ai/yawnjob/whitepaper) | [Docs](https://yawn.ai/docs) | [Network](https://yawn.ai/yawn-network) | [Jobs Library](https://yawn.ai/jobs) | [Discord](https://discord.gg/yawn) | [Examples](examples/)
 
@@ -15,7 +15,7 @@ A cron job with a brain. The holonic unit of AI-native work.
 
 ## What is a YawnJob?
 
-A **YawnJob** is a holonic, AI-native, super-capable Job-to-be-Done.
+A **YawnJob** is a holonic, AI-native, super-capable Job-to-be-Done, digital organism.
 
 Think of it as the fundamental unit of work that bridges human intention and AI execution. Unlike traditional cron jobs that blindly run commands, a YawnJob knows:
 
@@ -23,6 +23,7 @@ Think of it as the fundamental unit of work that bridges human intention and AI 
 - **WHAT** blocks success (obstacles)
 - **HOW** to prove it worked (evidence)
 - **WHAT** it learned (insights)
+- **WHO** is responsible for it (responsibility)
 
 ```mermaid
 flowchart LR
